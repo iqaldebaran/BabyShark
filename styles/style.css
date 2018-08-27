@@ -1,0 +1,13 @@
+/* Style in Canvas */
+canvas {
+  border: 2px solid black;
+  padding: 0;
+  margin: auto;
+  display: block;
+  cursor:none;
+}
+
+/* h1 - Style */
+h1{
+  text-align: center;
+}
