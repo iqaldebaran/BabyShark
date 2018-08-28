@@ -1,16 +1,34 @@
 // INFO
 // Class Fish - Pez a comer
 
-class Fish{
-  constructor(){
-    this.x = 800;
-    this.y = 200;
+class Fish {
+  constructor() {
+    this.x = 11 //Math.floor((Math.random() * 800) + 1);
+    this.y = Math.floor((Math.random() * 800) + 1);;
     this.width = 30;
     this.height = 20;
     this.image = new Image();
     this.image.src = "../img/fish1.png"
   }
-  draw(){
+  draw() {
+    this.x += Math.floor((Math.random() * Math.floor((Math.random() * 20) + 1)) + 1);;
+    this.y += Math.floor((Math.random() * (-1)) + Math.floor((Math.random() * (-1)) + 2));;
+    context.drawImage(this.image, this.x, this.y, this.width, this.height);
+  }
+}
+
+class GlobeFish {
+  constructor() {
+    this.x = 800 //Math.floor((Math.random() * 800) + 1);
+    this.y = Math.floor((Math.random() * 400) + 1);;
+    this.width = 55;
+    this.height = 50;
+    this.image = new Image();
+    this.image.src = "../img/globeFish.png"
+  }
+  draw() {
+    this.x -= Math.floor((Math.random() * Math.floor((Math.random() * 20) - 1)) - 1);;
+    this.y += Math.floor((Math.random() * (-1)) + Math.floor((Math.random() * (-1)) + 2));;
     context.drawImage(this.image, this.x, this.y, this.width, this.height);
   }
 }
