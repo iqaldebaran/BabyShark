@@ -11,7 +11,7 @@ class BabyShark {
     this.width = 70;
     this.height = 50;
     this.image = new Image();
-    this.image.src = "../img/babyshark.png";
+    this.image.src = "../img/Babyshark.png";
   }
   draw(x, y) { //x y y son las posiciones del mouse para que siga al cursor
     context.drawImage(this.image, x, y, this.width, this.height);

@@ -28,7 +28,7 @@ setInterval(function () {
   fishes.push(fish);
   var globeFish = new GlobeFish();
   globeFishes.push(globeFish);
-}, 1000);
+}, 200);
 
 function generateFish() {
   fishes.forEach(function (fish) {
