@@ -16,10 +16,10 @@ class Fish {
     context.drawImage(this.image, this.x, this.y, this.width, this.height);
   }
 }
-
+//Ver extend Fish -- super ver ividZavala/webdev-PT-Mex sexta semana
 class GlobeFish {
   constructor() {
-    this.x = 800 //Math.floor((Math.random() * 800) + 1);
+    this.x = Math.floor((Math.random() * 800) + 1);
     this.y = Math.floor((Math.random() * 800) + 1);;
     this.width = 55;
     this.height = 50;

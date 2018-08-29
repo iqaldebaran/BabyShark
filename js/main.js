@@ -31,10 +31,11 @@ setInterval(function () {
 }, 200);
 
 function generateFish() {
-  fishes.forEach(function (fish) {
+  fishes.forEach(function (fish, index) {
     fish.draw();
     //  Aqui se come el tiburon al pez
-    if (babyShark.collision(fish)) console.log("Me comiste");
+    if (babyShark.collision(fish)) console.log(fishes.splice(index,1));
+    //console.log("Me comiste");
   })
 }
 
