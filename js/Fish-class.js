@@ -8,7 +8,7 @@ class Fish {
     this.width = 30;
     this.height = 20;
     this.image = new Image();
-    this.image.src = "../img/Fish1.png"
+    this.image.src = "https://s3.amazonaws.com/www.norverum.com/Fish1.png"
   }
   draw() {
     this.x += Math.floor((Math.random() * Math.floor((Math.random() * 20) + 1)) + 1);;
@@ -24,7 +24,7 @@ class GlobeFish {
     this.width = 55;
     this.height = 50;
     this.image = new Image();
-    this.image.src = "../img/GlobeFish.png"
+    this.image.src = "https://s3.amazonaws.com/www.norverum.com/GlobeFish.png"
   }
   draw() {
     this.x -= Math.floor((Math.random() * Math.floor((Math.random() * 20) - 1)) - 1);;
