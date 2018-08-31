@@ -8,10 +8,10 @@ var mouseY = 0;
 
 class BabyShark {
   constructor() {
-    this.width = 70;
-    this.height = 50;
+    this.width =70; //70
+    this.height = 50; //50
     this.image = new Image();
-    this.image.src = "../img/Babyshark.png";
+    this.image.src = "https://s3.amazonaws.com/www.norverum.com/Babyshark.png";
   }
   draw(x, y) { //x y y son las posiciones del mouse para que siga al cursor
     context.drawImage(this.image, x, y, this.width, this.height);
