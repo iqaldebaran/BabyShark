@@ -11,7 +11,7 @@ class BabyShark {
     this.width =70; //70
     this.height = 50; //50
     this.image = new Image();
-    this.image.src = "https://s3.amazonaws.com/www.norverum.com/Babyshark.png";
+    this.image.src = "https://s3.amazonaws.com/www.norverum.com/BabySharkAssets/Babyshark.png";
   }
   draw(x, y) { //x y y son las posiciones del mouse para que siga al cursor
     context.drawImage(this.image, x, y, this.width, this.height);
@@ -33,7 +33,7 @@ function mousePos() { 
 }
 
 //  "Escuchamos" al puntero del mouse
-canvas.addEventListener("mousemove", setMousePosition, false);
+canvas.addEventListener("mousemove", setMousePosition, true);
 
 var canvasPos = getPosition(canvas); //Llamamos a la funcion para obtener las coordenadas del mouse en el canvas
 
@@ -56,3 +56,5 @@ function getPosition(el) {
     y: yPosition
   };
 }
+
+

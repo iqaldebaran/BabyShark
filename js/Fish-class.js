@@ -2,13 +2,13 @@
 // Class Fish - Pez a comer
 
 class Fish {
-  constructor() {
-    this.x = 11 //Math.floor((Math.random() * 800) + 1);
-    this.y = Math.floor((Math.random() *800) + 1);;
-    this.width = 30;
-    this.height = 20;
+  constructor(x, y, width, height, image) {
+    this.x = x; 
+    this.y = y; 
+    this.width = width;
+    this.height = height;
     this.image = new Image();
-    this.image.src = "https://s3.amazonaws.com/www.norverum.com/Fish1.png"
+    this.image.src = image; 
   }
   draw() {
     this.x += Math.floor((Math.random() * Math.floor((Math.random() * 20) + 1)) + 1);;
@@ -16,19 +16,29 @@ class Fish {
     context.drawImage(this.image, this.x, this.y, this.width, this.height);
   }
 }
-//Ver extend Fish -- super ver ividZavala/webdev-PT-Mex sexta semana
-class GlobeFish {
-  constructor() {
-    this.x = 1200; //Math.floor((Math.random() * 1200) + 1);
-    this.y = Math.floor((Math.random() * 1200) + 1);;
-    this.width = 55;
-    this.height = 50;
-    this.image = new Image();
-    this.image.src = "https://s3.amazonaws.com/www.norverum.com/GlobeFish.png"
+//Ver extend Fish -- super ver Da-z––---sa-s-ss-ds--d---ds-sdd-––d-ividZavala/webdev-PT-Mex sexta semana
+//Class GlobeFish - venenoso
+class GlobeFish extends Fish {
+  constructor(x, y, width, height, image, damage) {
+    super(x, y, width, height, image)
+    this.damage = damage
   }
   draw() {
     this.x -= Math.floor((Math.random() * Math.floor((Math.random() * 20) - 1)) - 1);;
     this.y += Math.floor((Math.random() * (-1)) + Math.floor((Math.random() * (-1)) + 2));;
+    context.drawImage(this.image, this.x, this.y, this.width, this.height);
+  }
+}
+
+//Class crab - avienta burbujas
+class Crab extends Fish {
+  constructor(x, y, width, height, image, bubbles) {
+    super(x, y, width, height, image)
+    this.bubbles = bubbles; //
+  }
+  draw() {
+    this.x -=  Math.floor((Math.random() * Math.floor((Math.random() * 20) - 1)) + 1);
+    //if(this.x < 0) this.x += 200; //Regresa el cangrejo al llegar a la x = 0
     context.drawImage(this.image, this.x, this.y, this.width, this.height);
   }
 }

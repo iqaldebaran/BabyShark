@@ -1,13 +1,24 @@
 /* Style in Canvas */
 canvas {
-  border: 2px solid black;
+  border: 2px solid lightgrey;
   padding: 0;
   margin: auto;
   display: block;
-  cursor:none;
+  cursor: none; 
 }
 
 /* h1 - Style */
-h1{
+h1,
+h2 {
   text-align: center;
+}
+
+button {
+  width: 100px;
+  margin: 0 auto;
+  display: block;
+}
+
+div{
+  padding: 10px;
 }
