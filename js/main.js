@@ -27,6 +27,7 @@ var soundBackFirst = new Audio(soundBack); //Sonido de fondo
 // FUNCION START GAME
 function startGame() {
   soundBackFirst.play();
+  soundBackFirst.volume = 0.2;
   setInterval = setInterval(function () {
     context.clearRect(0, 0, canvas.width, canvas.height);
     generateFish();
@@ -128,5 +129,7 @@ canvas.removeEventListener("mousemove", setMousePosition);
   //location.reload();
    clearInterval(setInterval);
    //context.clearRect(0, 0, canvas.width, canvas.height);
+   soundBackFirst.pause();
+
 
 }
