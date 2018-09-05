@@ -2,23 +2,31 @@
 var canvas = document.getElementById("canvas");
 var context = canvas.getContext("2d");
 
+
 //Creamos el objeto babyShark - BabyShark.js
 var babyShark = new BabyShark();
 // Mueve el mouse con el objeto -BabyShark.js
 mousePos();
 
-// Cargamos imágenes y sonidos en variables:
+// IMAGENES:
 var imgFish = "https://s3.amazonaws.com/www.norverum.com/BabySharkAssets/Fish1.png";
 var imgGlobeFish = "https://s3.amazonaws.com/www.norverum.com/BabySharkAssets/GlobeFish.png";
-var imgCrab = "https://s3.amazonaws.com/www.norverum.com/BabySharkAssets/Crab.png"
-var soundEat = "https://s3.amazonaws.com/www.norverum.com/BabySharkAssets/Am.mp3"
-var imgBubbles = "https://s3.amazonaws.com/www.norverum.com/BabySharkAssets/bubbles1.png"
+var imgCrab = "https://s3.amazonaws.com/www.norverum.com/BabySharkAssets/Crab.png";
+var imgBubbles = "https://s3.amazonaws.com/www.norverum.com/BabySharkAssets/bubbles1.png";
+
+// SONIDOS;
+var soundEat = "https://s3.amazonaws.com/www.norverum.com/BabySharkAssets/Am.mp3";
+var soundKill = "https://s3.amazonaws.com/www.norverum.com/BabySharkAssets/O-no.mp3";
+var soundBack = "https://s3.amazonaws.com/www.norverum.com/BabySharkAssets/BabySharkTheme1.mp3";
 
 // VARIABLES DE SONIDOS
 var soundBabyShark = new Audio(soundEat); //Al comer un pez
+var soundKillBabyShark = new Audio(soundKill); //Al comer un pez globo... muere
+var soundBackFirst = new Audio(soundBack); //Sonido de fondo
 
 // FUNCION START GAME
 function startGame() {
+  soundBackFirst.play();
   setInterval = setInterval(function () {
     context.clearRect(0, 0, canvas.width, canvas.height);
     generateFish();
@@ -44,7 +52,7 @@ setInterval(function () {
 setInterval(function () {
   var globeFish = new GlobeFish(canvas.width, Math.floor((Math.random() * canvas.width) + 1), 55, 50, imgGlobeFish);
   globeFishes.push(globeFish);
-}, 3000); //Cambia cantidad de peces globo a generar
+}, 1000); //Cambia cantidad de peces globo a generar
 
 // Velocidad de generacion de Cangrejos - Crab
 setInterval(function () {
@@ -62,6 +70,7 @@ function generateFish() {
       fishes.splice(index, 1); //Come un pez
       document.getElementById("score").innerHTML = score++; //Imprime el score en pantalla cada vez que come un pez
       soundBabyShark.play(); //Sonido Am.mp3
+      
     };
   })
 }
@@ -72,7 +81,7 @@ function generateGlobeFish() {
     if (globeFish.x < 20) return globeFishes.splice(index, 1); //Borra al pezGlobo para liberar memoria
     //  Accion cuando colisiona con el pez globo
     if (babyShark.collision(globeFish)) {
-      console.error("Me comiste");
+      gameOver();
     }
   })
 }
@@ -110,12 +119,14 @@ var gameOver = function () {
   context.font = "40px Avenir";
   // Dibujamos el texto en el canvas.
   context.fillText("GAME OVER", canvas.width / 2, canvas.height / 2);
+  soundKillBabyShark.play(); //Sonido al comer pez globo - muere
+
 
 
   // Detenemos la ejecución del intervalo
-  canvas.removeEventListener("mousemove", setMousePosition);
-  location.reload();
+canvas.removeEventListener("mousemove", setMousePosition);
+  //location.reload();
    clearInterval(setInterval);
-   context.clearRect(0, 0, canvas.width, canvas.height);
+   //context.clearRect(0, 0, canvas.width, canvas.height);
 
 }

@@ -4,7 +4,9 @@ canvas {
   padding: 0;
   margin: auto;
   display: block;
-  cursor: none; 
+  cursor: none;
+  background: url(https://s3.amazonaws.com/www.norverum.com/BabySharkAssets/Fondo1.jpg);
+  background-size: 100% 100%;
 }
 
 /* h1 - Style */
@@ -19,6 +21,6 @@ button {
   display: block;
 }
 
-div{
+div {
   padding: 10px;
 }
