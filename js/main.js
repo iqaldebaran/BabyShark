@@ -59,7 +59,7 @@ setInterval(function () {
 setInterval(function () {
   var crab = new Crab(canvas.width, canvas.height - 50, 55, 50, imgCrab);
   crabs.push(crab);
-}, 1000); //Cambia cantidad de cangrejos a generar
+}, 5000); //Cambia cantidad de cangrejos a generar
 
 // FUNCIONES DIBUJAN Y EVENTOS EN COLISION
 function generateFish() {
@@ -71,7 +71,6 @@ function generateFish() {
       fishes.splice(index, 1); //Come un pez
       document.getElementById("score").innerHTML = score++; //Imprime el score en pantalla cada vez que come un pez
       soundBabyShark.play(); //Sonido Am.mp3
-      
     };
   })
 }
@@ -114,22 +113,23 @@ document.getElementById("start-game").onclick = function () {
   }
 }
 
-// ---- Funcion GameOver -----
+// ---- FUNCION GAMEOVER -----
 var gameOver = function () {
   // Definimos el tamaño y fuente de nuestro texto
-  context.font = "40px Avenir";
+  context.font = "60px Avenir";
+  var textGameOver = "GAME OVER";
   // Dibujamos el texto en el canvas.
-  context.fillText("GAME OVER", canvas.width / 2, canvas.height / 2);
+  var textLength = context.measureText(textGameOver).width/2; //Para centrar el GameOver sin improtar el tamaño del canvas
+  context.fillText(textGameOver, (canvas.width / 2)-textLength, canvas.height / 2);
   soundKillBabyShark.play(); //Sonido al comer pez globo - muere
 
-
+  // location.reload();
 
   // Detenemos la ejecución del intervalo
-canvas.removeEventListener("mousemove", setMousePosition);
-  //location.reload();
-   clearInterval(setInterval);
-   //context.clearRect(0, 0, canvas.width, canvas.height);
-   soundBackFirst.pause();
+  canvas.removeEventListener("mousemove", setMousePosition);
+  clearInterval(setInterval);
+  //context.clearRect(0, 0, canvas.width, canvas.height);
+  soundBackFirst.pause();
 
 
 }

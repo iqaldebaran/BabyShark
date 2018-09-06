@@ -33,7 +33,8 @@ function mousePos() { 
 }
 
 //  "Escuchamos" al puntero del mouse
-canvas.addEventListener("mousemove", setMousePosition, true);
+canvas.addEventListener("mousemove", setMousePosition);
+
 
 var canvasPos = getPosition(canvas); //Llamamos a la funcion para obtener las coordenadas del mouse en el canvas
 
