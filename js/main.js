@@ -1,6 +1,9 @@
 // Llamada al canvas del html
 var canvas = document.getElementById("canvas");
+// canvas.width = document.body.clientWidth; //document.width is obsolete
+// canvas.height = document.body.clientHeight; //document.height is obsolete
 var context = canvas.getContext("2d");
+
 
 
 // CONTADOR SCORE
@@ -11,7 +14,6 @@ console.log("que es: " + document.getElementById("score").innerHTML);
 //Creamos el objeto babyShark - BabyShark.js
 var babyShark = new BabyShark();
 // Mueve el mouse con el objeto -BabyShark.js
-mousePos();
 
 // IMAGENES:
 var imgFish = "https://s3.amazonaws.com/www.norverum.com/BabySharkAssets/Fish1.png";
@@ -32,6 +34,8 @@ var soundBackFirst = new Audio(soundBack); //Sonido de fondo
 
 // FUNCION START GAME
 function startGame() {
+  mousePos();
+  document.getElementById("canvas").style.cursor = "none";   //Se oculta el puntero del mouse en el canvas
   soundBackFirst.play();
   soundBackFirst.volume = 0.2;
   setInterval = setInterval(function () {
@@ -42,7 +46,6 @@ function startGame() {
     generateWhale();
   }, 1000 / 60);
 }
-
 
 // ----- GENERACION DE ANIMALES ----------
 var globeFishes = [];
@@ -154,6 +157,8 @@ var gameOver = function () {
   clearInterval(setInterval);
   //context.clearRect(0, 0, canvas.width, canvas.height);
   soundBackFirst.pause();
+  document.getElementById("canvas").style.cursor = "initial";
+
 
 
 }
