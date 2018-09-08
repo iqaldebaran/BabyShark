@@ -23,6 +23,7 @@ class BabyShark {
       (mouseY < item.y + item.height) &&
       (mouseY + this.height > item.y);
   }
+  
 }
 
 // SEGUIMIENTO DE LA IMAGEN AL MOUSE
