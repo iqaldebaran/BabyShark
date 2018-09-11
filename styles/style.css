@@ -1,3 +1,8 @@
+body {
+  background-image: linear-gradient(blue, aqua);
+
+}
+
 /* Style in Canvas */
 canvas {
   border: 2px solid lightgrey;
@@ -6,21 +11,23 @@ canvas {
   display: block;
   /* cursor: none; */
   background: url(https://s3.amazonaws.com/www.norverum.com/BabySharkAssets/Fondo1.jpg);
-  background-size: 100% 100%;
+    background-size: 100% 100%;
 }
 
 /* h1 - Style */
 h1,
 h2 {
   text-align: center;
+  color: aliceblue !important;
 }
 
 button {
   width: 100px;
   margin: 0 auto;
-  display: block;
+  justify-content: center;
 }
 
 div {
   padding: 10px;
+  align-items: center;
 }

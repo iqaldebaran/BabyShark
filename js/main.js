@@ -4,12 +4,10 @@ var canvas = document.getElementById("canvas");
 // canvas.height = document.body.clientHeight; //document.height is obsolete
 var context = canvas.getContext("2d");
 
-
-
 // CONTADOR SCORE
-var score = 0;
+var score = 1;
 
-console.log("que es: " + document.getElementById("score").innerHTML);
+// console.log("que es: " + document.getElementById("score").innerHTML);
 
 //Creamos el objeto babyShark - BabyShark.js
 var babyShark = new BabyShark();
@@ -34,7 +32,8 @@ var soundBackFirst = new Audio(soundBack); //Sonido de fondo
 
 // FUNCION START GAME
 function startGame() {
-  mousePos();
+
+  mousePos(); //Sigue al tiburon con el mouse
   document.getElementById("canvas").style.cursor = "none";   //Se oculta el puntero del mouse en el canvas
   soundBackFirst.play();
   soundBackFirst.volume = 0.2;
@@ -57,7 +56,7 @@ var whales = [];
 setInterval(function () {
   var fish = new Fish(11, Math.floor((Math.random() * canvas.height) + 1), 30, 20, imgFish);
   fishes.push(fish);
-}, 1000); //Cambia la cantidad de peces a generar
+}, 500); //Cambia la cantidad de peces a generar
 
 // Velocidad de generacion de peces globo
 setInterval(function () {
@@ -84,8 +83,8 @@ function generateFish() {
     if (fish.x > canvas.width - 100) return fishes.splice(index, 1); //Borra al pez para liberar memoria
     //  Aqui se come el tiburon al pez
     if (babyShark.collision(fish)) {
-      fishes.splice(index, 1); //Come un pez
       document.getElementById("score").innerHTML = score++; //Imprime el score en pantalla cada vez que come un pez
+      fishes.splice(index, 1); //Come un pez
       soundBabyShark.play(); //Sonido Am.mp3
     };
   })
@@ -94,7 +93,7 @@ function generateFish() {
 function generateGlobeFish() {
   globeFishes.forEach(function (globeFish, index) {
     globeFish.draw();
-    if (globeFish.x < 20) return globeFishes.splice(index, 1); //Borra al pezGlobo para liberar memoria
+    if (globeFish.x < 0) return globeFishes.splice(index, 1); //Borra al pezGlobo para liberar memoria
     //  Accion cuando colisiona con el pez globo
     if (babyShark.collision(globeFish)) {
       gameOver();
@@ -105,7 +104,7 @@ function generateGlobeFish() {
 function generateWhale() {
   whales.forEach(function (whale, index) {
     whale.draw();
-    if (whale.x < 20) return whales.splice(index, 1); //Borra a la Ballena para liberar memoria
+    if (whale.x < -500) return whales.splice(index, 1); //Borra a la Ballena para liberar memoria
     //  Accion cuando colisiona con la Ballena
     if (babyShark.collision(whale)) {
       gameOver();
@@ -116,7 +115,7 @@ function generateWhale() {
 function generateCrab() {
   crabs.forEach(function (crab, index) {
     crab.draw();
-    if (crab.x < 20) return crabs.splice(index, 1); //Borra al cangrejo para liberar memoria
+    if (crab.x < 00) return crabs.splice(index, 1); //Borra al cangrejo para liberar memoria
     //  Accion cuando colisiona con el Cangrejo
     if (babyShark.collision(crab)) {
       gameOver();
@@ -146,19 +145,21 @@ var gameOver = function () {
   context.font = "60px Avenir";
   var textGameOver = "GAME OVER";
   // Dibujamos el texto en el canvas.
-  var textLength = context.measureText(textGameOver).width / 2; //Para centrar el GameOver sin improtar el tamaño del canvas
-  context.fillText(textGameOver, (canvas.width / 2) - textLength, canvas.height / 2);
-  soundKillBabyShark.play(); //Sonido al comer pez globo - muere
-
+  var textLenghtGameOver = context.measureText(textGameOver).width / 2; //Para centrar el GameOver sin improtar el tamaño del canvas
+  context.fillText(textGameOver, (canvas.width / 2) - textLenghtGameOver, canvas.height / 3);
+  var textScore = "Score: "+(score-1);
+  var textLenghtScore = context.measureText(textScore).width / 2; //Para centrar el GameOver sin improtar el tamaño del canvas
+  context.fillText(textScore, (canvas.width / 2) - textLenghtScore, canvas.height / 2);
+  
+  soundKillBabyShark.play(); //Sonido al comer pez globo, ballena o cangreo - muere
   // location.reload();
-
   // Detenemos la ejecución del intervalo
   canvas.removeEventListener("mousemove", setMousePosition);
   clearInterval(setInterval);
   //context.clearRect(0, 0, canvas.width, canvas.height);
   soundBackFirst.pause();
+  // Regresa el cursor a su icono original
   document.getElementById("canvas").style.cursor = "initial";
-
-
-
+  // Cambia el boton a Start luego de estar en Stop
+  document.getElementById("start-game").innerHTML = "Start"
 }

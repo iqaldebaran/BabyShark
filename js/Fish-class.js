@@ -11,7 +11,7 @@ class Fish {
     this.image.src = image; 
   }
   draw() {
-    this.x += Math.floor((Math.random() * Math.floor((Math.random() * 20) + 1)) + 1);;
+    this.x += Math.floor((Math.random() * Math.floor((Math.random() * 20) + 10)) + 1);;
     this.y += Math.floor((Math.random() * (-1)) + Math.floor((Math.random() * (-1)) + 2));;
     context.drawImage(this.image, this.x, this.y, this.width, this.height);
   }
@@ -24,7 +24,7 @@ class GlobeFish extends Fish {
     this.damage = damage
   }
   draw() {
-    this.x -= Math.floor((Math.random() * Math.floor((Math.random() * 20) - 1)) - 1);;
+    this.x -= Math.floor((Math.random() * Math.floor((Math.random() * 25) - 1)) - 1);;
     this.y += Math.floor((Math.random() * (-1)) + Math.floor((Math.random() * (-1)) + 2));;
     context.drawImage(this.image, this.x, this.y, this.width, this.height);
   }
