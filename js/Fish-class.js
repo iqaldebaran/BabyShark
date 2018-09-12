@@ -1,6 +1,5 @@
 // INFO
 // Class Fish - Pez a comer
-
 class Fish {
   constructor(x, y, width, height, image) {
     this.x = x; 
@@ -16,19 +15,24 @@ class Fish {
     context.drawImage(this.image, this.x, this.y, this.width, this.height);
   }
 }
-//Ver extend Fish -- super ver Da-z––---sa-s-ss-ds--d---ds-sdd-––d-ividZavala/webdev-PT-Mex sexta semana
+//Ver extend Fish -- super ver DaividZavala/webdev-PT-Mex sexta semana
 //Class GlobeFish - venenoso
+var moreVelocity = 10;
 class GlobeFish extends Fish {
   constructor(x, y, width, height, image, damage) {
     super(x, y, width, height, image)
     this.damage = damage
   }
   draw() {
-    this.x -= Math.floor((Math.random() * Math.floor((Math.random() * 25) - 1)) - 1);;
+    this.x -= Math.floor((Math.random() * Math.floor((Math.random() * moreVelocity) - 1)) - 1);;
     this.y += Math.floor((Math.random() * (-1)) + Math.floor((Math.random() * (-1)) + 2));;
     context.drawImage(this.image, this.x, this.y, this.width, this.height);
   }
 }
+
+//AUMENTO DE DIFICULTAD AL AUMENTAR LA VEOLIDAD DE LOS PECES GLOBO
+setInterval(() => {moreVelocity++;}, 500);
+
 
 //Class crab - avienta burbujas
 class Crab extends Fish {

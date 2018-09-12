@@ -23,7 +23,6 @@ class BabyShark {
       (mouseY < item.y + item.height) &&
       (mouseY + this.height > item.y);
   }
-  
 }
 
 // SEGUIMIENTO DE LA IMAGEN AL MOUSE
@@ -35,7 +34,6 @@ function mousePos() { 
 
 //  "Escuchamos" al puntero del mouse
 canvas.addEventListener("mousemove", setMousePosition);
-
 
 var canvasPos = getPosition(canvas); //Llamamos a la funcion para obtener las coordenadas del mouse en el canvas
 
