@@ -7,8 +7,14 @@ var context = canvas.getContext("2d");
 // Titulo del juego
 context.font = "60px Avenir";
 var titleGame = "Baby Shark Game";
-var textTitleLength = context.measureText(titleGame).width / 2; 
-context.fillText(titleGame, (canvas.width / 2) - textTitleLength, canvas.height / 2);
+var textTitleLength = context.measureText(titleGame).width / 2;
+context.fillText(titleGame, (canvas.width / 2) - textTitleLength, canvas.height / 3);
+
+context.font = "30px Avenir";
+var startGamePress = "Press 'Enter' to Start";
+var startGameLength = context.measureText(startGamePress).width / 2;
+context.fillText(startGamePress, (canvas.width / 2) - startGameLength, canvas.height / 2);
+
 
 // CONTADOR SCORE
 var score = 1;
@@ -134,10 +140,10 @@ function generateCrab() {
 // ------- START y STOP ------------
 addEventListener("keydown", function (e) {
   if (e.keyCode === 13) { //Enter
-      startGame();
+    startGame();
   }
   if (e.keyCode === 27) { // esc se reinicia
-      gameOver();
+    gameOver();
   }
 })
 
@@ -176,3 +182,4 @@ var gameOver = function () {
   // Regresa el cursor a su icono original
   document.getElementById("canvas").style.cursor = "initial";
 }
+
