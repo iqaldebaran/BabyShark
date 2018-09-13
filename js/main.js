@@ -4,6 +4,12 @@ var canvas = document.getElementById("canvas");
 // canvas.height = document.body.clientHeight; //document.height is obsolete
 var context = canvas.getContext("2d");
 
+// Titulo del juego
+context.font = "60px Avenir";
+var titleGame = "Baby Shark Game";
+var textTitleLength = context.measureText(titleGame).width / 2; 
+context.fillText(titleGame, (canvas.width / 2) - textTitleLength, canvas.height / 2);
+
 // CONTADOR SCORE
 var score = 1;
 
@@ -32,11 +38,10 @@ var soundBackFirst = new Audio(soundBack); //Sonido de fondo
 
 // FUNCION START GAME
 function startGame() {
-
   mousePos(); //Sigue al tiburon con el mouse
-  document.getElementById("canvas").style.cursor = "none";   //Se oculta el puntero del mouse en el canvas
+  document.getElementById("canvas").style.cursor = "none"; //Se oculta el puntero del mouse en el canvas
   soundBackFirst.play();
-  soundBackFirst.volume = 0.2;
+  soundBackFirst.volume = 0.2; //Disminuye volumen de fondo
   setInterval = setInterval(function () {
     context.clearRect(0, 0, canvas.width, canvas.height);
     generateFish();
@@ -84,6 +89,7 @@ function generateFish() {
     //  Aqui se come el tiburon al pez
     if (babyShark.collision(fish)) {
       document.getElementById("score").innerHTML = score++; //Imprime el score en pantalla cada vez que come un pez
+      document.getElementById("progress").value = score; //Progress bar
       fishes.splice(index, 1); //Come un pez
       soundBabyShark.play(); //Sonido Am.mp3
     };
@@ -125,19 +131,29 @@ function generateCrab() {
   })
 }
 
-// -------BOTON START ------------
-document.getElementById("start-game").onclick = function () {
-  switch (document.getElementById("start-game").innerHTML) {
-    case "Start":
-      startGame()
-      document.getElementById("start-game").innerHTML = "Stop"
-      break;
-    case "Stop":
-      gameOver();
-      document.getElementById("start-game").innerHTML = "Start"
-      break;
+// ------- START y STOP ------------
+addEventListener("keydown", function (e) {
+  if (e.keyCode === 13) { //Enter
+      startGame();
   }
-}
+  if (e.keyCode === 27) { // esc se reinicia
+      gameOver();
+  }
+})
+
+// Alternativa con un boton
+// document.getElementById("start-game").onclick = function () {
+//   switch (document.getElementById("start-game").innerHTML) {
+//     case "Start":
+//       startGame()
+//       document.getElementById("start-game").innerHTML = "Stop"
+//       break;
+//     case "Stop":
+//       gameOver();
+//       document.getElementById("start-game").innerHTML = "Start"
+//       break;
+//   }
+// }
 
 // ---- FUNCION GAMEOVER -----
 var gameOver = function () {
@@ -147,12 +163,11 @@ var gameOver = function () {
   // Dibujamos el texto en el canvas.
   var textLenghtGameOver = context.measureText(textGameOver).width / 2; //Para centrar el GameOver sin improtar el tamaño del canvas
   context.fillText(textGameOver, (canvas.width / 2) - textLenghtGameOver, canvas.height / 3);
-  var textScore = "Score: "+(score-1);
+  var textScore = "Score: " + (score - 1);
   var textLenghtScore = context.measureText(textScore).width / 2; //Para centrar el GameOver sin improtar el tamaño del canvas
   context.fillText(textScore, (canvas.width / 2) - textLenghtScore, canvas.height / 2);
-  
+
   soundKillBabyShark.play(); //Sonido al comer pez globo, ballena o cangreo - muere
-  // location.reload();
   // Detenemos la ejecución del intervalo
   canvas.removeEventListener("mousemove", setMousePosition);
   clearInterval(setInterval);
@@ -160,6 +175,4 @@ var gameOver = function () {
   soundBackFirst.pause();
   // Regresa el cursor a su icono original
   document.getElementById("canvas").style.cursor = "initial";
-  // Cambia el boton a Start luego de estar en Stop
-  document.getElementById("start-game").innerHTML = "Start"
 }

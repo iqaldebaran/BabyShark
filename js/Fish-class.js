@@ -30,11 +30,11 @@ class GlobeFish extends Fish {
   }
 }
 
-//AUMENTO DE DIFICULTAD AL AUMENTAR LA VEOLIDAD DE LOS PECES GLOBO
+//AUMENTO DE DIFICULTAD AL AUMENTAR LA VELOCIDAD DE LOS PECES GLOBO
 setInterval(() => {moreVelocity++;}, 500);
 
 
-//Class crab - avienta burbujas
+//Class crab - avienta burbujas -> No lo hace...version 2.0 futura...
 class Crab extends Fish {
   constructor(x, y, width, height, image, bubbles) {
     super(x, y, width, height, image)

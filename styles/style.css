@@ -3,6 +3,23 @@ body {
 
 }
 
+progress::-webkit-progress-bar { background: rgb(242, 241, 245); }
+progress::-webkit-progress-value { background: red; }
+
+#progress{
+  -webkit-appearance: progress-bar;
+  
+  border: 0;
+  height: 18px;
+  width: 70%;
+  border-radius: 9px;
+}
+
+.div-container{
+  display: flex;
+  justify-content: space-around;
+}
+
 /* Style in Canvas */
 canvas {
   border: 2px solid lightgrey;
