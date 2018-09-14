@@ -31,6 +31,8 @@ if (dbScore1.set({
 
 dbScore1.on("value", function (snapshot) {
   dbUser1 = snapshot.val();
+  document.getElementById("progress").value = dbUser1.scoreUsr1; //Progress bar
+
   console.log("lee: " + dbUser1.scoreUsr1);
 }, function (errorObject) {
   console.log("The read failed: " + errorObject.code);
@@ -145,7 +147,7 @@ function generateFish() {
     //  Aqui se come el tiburon al pez
     if (babyShark.collision(fish)) {
       document.getElementById("score").innerHTML = score++; //Imprime el score en pantalla cada vez que come un pez
-      document.getElementById("progress").value = score; //Progress bar
+      // document.getElementById("progress").value = score; //Progress bar
       dbScore1.set({
         scoreUsr1: score - 1
       })
