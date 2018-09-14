@@ -56,6 +56,13 @@ var score = 1;
 var dbScore1;
 var dbScore2;
 
+// ----- GENERACION DE ANIMALES ----------
+var globeFishes = [];
+var fishes = [];
+var crabs = [];
+var whales = [];
+
+
 // console.log("que es: " + document.getElementById("score").innerHTML);
 
 //Creamos el objeto babyShark - BabyShark.js
@@ -80,20 +87,15 @@ var soundKillBabyShark = new Audio(soundKill); //Al comer un pez globo... muere
 var soundBackFirst = new Audio(soundBack); //Sonido de fondo
 
 
-
-
 // FUNCION START GAME
 function startGame() {
+  score = 1;
+  genAnimals();
+  console.log(dbScore2.set({
+    user2: true
+  }));
 
-  if (dbScore2.set({
-      user2: true
-    })) {
-    console.log("Tenemos un jugaador mas")
-  }
-
-
-
-  // if(interval  !== undefined) return 0;
+  // if(interval  !== undefined) return;
 
   mousePos(); //Sigue al tiburon con el mouse
   document.getElementById("canvas").style.cursor = "none"; //Se oculta el puntero del mouse en el canvas
@@ -108,35 +110,32 @@ function startGame() {
   }, 1000 / 60);
 }
 
-// ----- GENERACION DE ANIMALES ----------
-var globeFishes = [];
-var fishes = [];
-var crabs = [];
-var whales = [];
+var genAnimals = function () {
+  // Velocidad de generacion de peces
+  setInterval(function () {
+    var fish = new Fish(11, Math.floor((Math.random() * canvas.height) + 1), 30, 20, imgFish);
+    fishes.push(fish);
+  }, 500); //Cambia la cantidad de peces a generar
 
-// Velocidad de generacion de peces
-setInterval(function () {
-  var fish = new Fish(11, Math.floor((Math.random() * canvas.height) + 1), 30, 20, imgFish);
-  fishes.push(fish);
-}, 500); //Cambia la cantidad de peces a generar
+  // Velocidad de generacion de peces globo
+  setInterval(function () {
+    var globeFish = new GlobeFish(canvas.width, Math.floor((Math.random() * canvas.width) + 1), 55, 50, imgGlobeFish);
+    globeFishes.push(globeFish);
+  }, 1000); //Cambia cantidad de peces globo a generar
 
-// Velocidad de generacion de peces globo
-setInterval(function () {
-  var globeFish = new GlobeFish(canvas.width, Math.floor((Math.random() * canvas.width) + 1), 55, 50, imgGlobeFish);
-  globeFishes.push(globeFish);
-}, 1000); //Cambia cantidad de peces globo a generar
+  // Velocidad de generacion de Cangrejos - Crab
+  setInterval(function () {
+    var crab = new Crab(canvas.width, canvas.height - 50, 55, 50, imgCrab);
+    crabs.push(crab);
+  }, 5000); //Cambia cantidad de cangrejos a generar
 
-// Velocidad de generacion de Cangrejos - Crab
-setInterval(function () {
-  var crab = new Crab(canvas.width, canvas.height - 50, 55, 50, imgCrab);
-  crabs.push(crab);
-}, 5000); //Cambia cantidad de cangrejos a generar
+  // Velocidad de generacion de Ballenas - Whale
+  setInterval(function () {
+    var whale = new Whale(canvas.width, Math.floor((Math.random() * canvas.width) + 1), 500, 300, imgWhale);
+    whales.push(whale);
+  }, 10000); //Cambia cantidad de Ballenas a generar
+}
 
-// Velocidad de generacion de Ballenas - Whale
-setInterval(function () {
-  var whale = new Whale(canvas.width, Math.floor((Math.random() * canvas.width) + 1), 500, 300, imgWhale);
-  whales.push(whale);
-}, 10000); //Cambia cantidad de Ballenas a generar
 
 // ---- FUNCIONES DIBUJAN Y EVENTOS EN COLISION
 function generateFish() {
@@ -208,7 +207,9 @@ addEventListener("keydown", function (e) {
 })
 
 // ------ FUNCION WIN ¡¡¡¡¡-------
-var youWin = function () {$('#modalWin').modal('show')}
+var youWin = function () {
+  $('#modalWin').modal('show')
+} //Llama al modal final
 
 // ---- FUNCION GAMEOVER -----
 var gameOver = function () {

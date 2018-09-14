@@ -31,7 +31,7 @@ class GlobeFish extends Fish {
 }
 
 //AUMENTO DE DIFICULTAD AL AUMENTAR LA VELOCIDAD DE LOS PECES GLOBO
-setInterval(() => {moreVelocity++;}, 500);
+setInterval(() => {moreVelocity++;}, 1000);
 
 
 //Class crab - avienta burbujas -> No lo hace...version 2.0 futura...
