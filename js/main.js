@@ -20,15 +20,32 @@ firebase.initializeApp(config);
 var scroreFirebase = document.getElementById("score");
 var dbScore1 = firebase.database().ref().child("score1");
 var dbScore2 = firebase.database().ref().child("score2");
+var dbUserNo = firebase.database().ref().child("userNo");
+
+
+
+dbUserNo.on("value", function (snapshot) {
+  userNo = snapshot.val();
+  usersConected = userNo.userNumber;
+}, function (errorObject) {
+  console.log("The read failed: " + errorObject.code);
+});
+
+
+// dbUserNo.set({
+//   userNumber: 0
+// })
+
 
 if (dbScore1.set({
-    user1: true
+    user1: 2
   })) {
   dbScore2.set({
-    user2: false
+    user2: 3
   })
 }
 
+//Trae de firebase el dato del score
 dbScore1.on("value", function (snapshot) {
   dbUser1 = snapshot.val();
   console.log("lee: " + dbUser1.scoreUsr1);
@@ -91,12 +108,9 @@ var soundBackFirst = new Audio(soundBack); //Sonido de fondo
 function startGame() {
   score = 1;
   genAnimals();
-  console.log(dbScore2.set({
+  console.log(dbScore2.set({ //Probando Firebase
     user2: true
   }));
-
-  // if(interval  !== undefined) return;
-
   mousePos(); //Sigue al tiburon con el mouse
   document.getElementById("canvas").style.cursor = "none"; //Se oculta el puntero del mouse en el canvas
   soundBackFirst.play();
