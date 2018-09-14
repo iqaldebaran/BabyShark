@@ -153,6 +153,7 @@ function generateFish() {
       // Si el score es 20 ganaste
       if (score > 20) {
         youWin();
+        gameOver();
       }
       fishes.splice(index, 1); //Come un pez
       soundBabyShark.play(); //Sonido Am.mp3
@@ -206,27 +207,8 @@ addEventListener("keydown", function (e) {
   }
 })
 
-// Alternativa con un boton
-// document.getElementById("start-game").onclick = function () {
-//   switch (document.getElementById("start-game").innerHTML) {
-//     case "Start":
-//       startGame()
-//       document.getElementById("start-game").innerHTML = "Stop"
-//       break;
-//     case "Stop":
-//       gameOver();
-//       document.getElementById("start-game").innerHTML = "Start"
-//       break;
-//   }
-// }
-
 // ------ FUNCION WIN ¡¡¡¡¡-------
-var youWin = function () {
-
-  $('#modalWin').modal('show')
-
-}
-
+var youWin = function () {$('#modalWin').modal('show')}
 
 // ---- FUNCION GAMEOVER -----
 var gameOver = function () {
