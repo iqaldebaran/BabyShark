@@ -12,6 +12,10 @@
     crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
+  <!-- PRUEBA CON FIREBASE -->
+  <script src="https://www.gstatic.com/firebasejs/5.5.0/firebase.js"></script>
+  <!-- FIREBASE END -->
+
   <title>Baby Shark Game</title>
 
 </head>
@@ -23,7 +27,7 @@
   </div>
   <div class="div-container">
     <!-- Progress Bar -->
-    <progress id="progress" value="0" max="100"></progress>
+    <progress id="progress" value="0" max="20"></progress>
     <h2>--Surprise¡¡</h2>
   </div>
 
@@ -41,7 +45,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h3 class="modal-title" id="exampleModalCenterTitle">Instructions</h3>
+          <h3 class="modal-title" id="instructions">Instructions</h3>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -78,6 +82,30 @@
       $('#myModal').modal('show');
     });
   </script>
+
+<!-- MODAL WIN¡¡¡ -->
+<!-- MODAL DE INSTRUCCIONES -->
+<div class="modal fade" id="modalWin" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title" id="win">You Win¡¡¡¡</h3>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="div-container">
+      </div>
+      <img src="https://media.giphy.com/media/3o6nUMjyu8VEuDBJpS/giphy.gif" alt="">
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+</div>
+</div>
 
   <!-- CALL JAVASCRIPT -->
   <script src="./js/BabyShark-class.js"></script>

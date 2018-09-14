@@ -4,6 +4,41 @@ var canvas = document.getElementById("canvas");
 // canvas.height = document.body.clientHeight; //document.height is obsolete
 var context = canvas.getContext("2d");
 
+var interval;
+
+// FIREBASE PRUEBA -------
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyDhPs0-vUprOwqVERdVijt685fdshlvSB8",
+  authDomain: "babyshark2-6a384.firebaseapp.com",
+  databaseURL: "https://babyshark2-6a384.firebaseio.com",
+  projectId: "babyshark2-6a384",
+  storageBucket: "babyshark2-6a384.appspot.com",
+  messagingSenderId: "253307363225"
+};
+firebase.initializeApp(config);
+var scroreFirebase = document.getElementById("score");
+var dbScore1 = firebase.database().ref().child("score1");
+var dbScore2 = firebase.database().ref().child("score2");
+
+if (dbScore1.set({
+    user1: true
+  })) {
+  dbScore2.set({
+    user2: false
+  })
+}
+
+dbScore1.on("value", function (snapshot) {
+  dbUser1 = snapshot.val();
+  console.log("lee: " + dbUser1.scoreUsr1);
+}, function (errorObject) {
+  console.log("The read failed: " + errorObject.code);
+});
+
+// Sincroniza datos Firebase
+console.log("as: " + dbScore1.user1);
+
 // Titulo del juego
 context.font = "60px Avenir";
 var titleGame = "Baby Shark Game";
@@ -18,6 +53,8 @@ context.fillText(startGamePress, (canvas.width / 2) - startGameLength, canvas.he
 
 // CONTADOR SCORE
 var score = 1;
+var dbScore1;
+var dbScore2;
 
 // console.log("que es: " + document.getElementById("score").innerHTML);
 
@@ -42,13 +79,27 @@ var soundBabyShark = new Audio(soundEat); //Al comer un pez
 var soundKillBabyShark = new Audio(soundKill); //Al comer un pez globo... muere
 var soundBackFirst = new Audio(soundBack); //Sonido de fondo
 
+
+
+
 // FUNCION START GAME
 function startGame() {
+
+  if (dbScore2.set({
+      user2: true
+    })) {
+    console.log("Tenemos un jugaador mas")
+  }
+
+
+
+  // if(interval  !== undefined) return 0;
+
   mousePos(); //Sigue al tiburon con el mouse
   document.getElementById("canvas").style.cursor = "none"; //Se oculta el puntero del mouse en el canvas
   soundBackFirst.play();
   soundBackFirst.volume = 0.2; //Disminuye volumen de fondo
-  setInterval = setInterval(function () {
+  interval = setInterval(function () {
     context.clearRect(0, 0, canvas.width, canvas.height);
     generateFish();
     generateGlobeFish();
@@ -96,11 +147,19 @@ function generateFish() {
     if (babyShark.collision(fish)) {
       document.getElementById("score").innerHTML = score++; //Imprime el score en pantalla cada vez que come un pez
       document.getElementById("progress").value = score; //Progress bar
+      dbScore1.set({
+        scoreUsr1: score - 1
+      })
+      // Si el score es 20 ganaste
+      if (score > 20) {
+        youWin();
+      }
       fishes.splice(index, 1); //Come un pez
       soundBabyShark.play(); //Sonido Am.mp3
     };
   })
 }
+
 
 function generateGlobeFish() {
   globeFishes.forEach(function (globeFish, index) {
@@ -161,6 +220,14 @@ addEventListener("keydown", function (e) {
 //   }
 // }
 
+// ------ FUNCION WIN ¡¡¡¡¡-------
+var youWin = function () {
+
+  $('#modalWin').modal('show')
+
+}
+
+
 // ---- FUNCION GAMEOVER -----
 var gameOver = function () {
   // Definimos el tamaño y fuente de nuestro texto
@@ -176,10 +243,9 @@ var gameOver = function () {
   soundKillBabyShark.play(); //Sonido al comer pez globo, ballena o cangreo - muere
   // Detenemos la ejecución del intervalo
   canvas.removeEventListener("mousemove", setMousePosition);
-  clearInterval(setInterval);
+  clearInterval(interval);
   //context.clearRect(0, 0, canvas.width, canvas.height);
   soundBackFirst.pause();
   // Regresa el cursor a su icono original
   document.getElementById("canvas").style.cursor = "initial";
 }
-

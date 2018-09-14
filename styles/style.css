@@ -1,6 +1,5 @@
 body {
   background-image: linear-gradient(blue, aqua);
-
 }
 
 progress::-webkit-progress-bar { background: rgb(242, 241, 245); }
