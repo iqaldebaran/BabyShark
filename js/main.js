@@ -9,12 +9,12 @@ var interval;
 // FIREBASE PRUEBA -------
 // Initialize Firebase
 var config = {
-  apiKey: "AIzaSyDhPs0-vUprOwqVERdVijt685fdshlvSB8",
-  authDomain: "babyshark2-6a384.firebaseapp.com",
-  databaseURL: "https://babyshark2-6a384.firebaseio.com",
-  projectId: "babyshark2-6a384",
-  storageBucket: "babyshark2-6a384.appspot.com",
-  messagingSenderId: "253307363225"
+  apiKey: "",
+  authDomain: "",
+  databaseURL: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: ""
 };
 firebase.initializeApp(config);
 var scroreFirebase = document.getElementById("score");
